@@ -64,5 +64,12 @@ describe("#load", function() {
         expect(loadFunction).not.toHaveBeenCalled();
       });
     });
+
+    it("loads nested jQuery.ready", function() {
+      load("projects#new", function(controller, action) {
+        $(function() { loadFunction(controller, action) })
+      });
+      expect(loadFunction).toHaveBeenCalledWith("projects", "new");
+    });
   });
 });
